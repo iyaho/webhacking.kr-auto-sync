@@ -1,0 +1,13 @@
+# 환경 설정
+.env
+.venv
+
+# Python 캐시
+__pycache__/
+*.pyc
+
+# 디버그용 임시 파일
+debug_*.html
+
+# macOS 시스템 파일
+.DS_Store
