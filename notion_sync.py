@@ -48,7 +48,6 @@ def get_existing_slugs(token, db_id):
 
     return existing
 
-
 def add_problem(token, db_id, problem):
     body = {
         "parent": {"database_id": db_id},
@@ -68,7 +67,47 @@ def add_problem(token, db_id, problem):
             "Score": {
                 "rich_text": [{"text": {"content": problem["score"]}}]
             }
-        }
+        },
+        "children": [
+            {
+                "object": "block",
+                "type": "heading_2",
+                "heading_2": {
+                    "rich_text": [{"type": "text", "text": {"content": "🔍 분석"}}]
+                }
+            },
+            {
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {"rich_text": []}
+            },
+            {"object": "block", "type": "divider", "divider": {}},
+            {
+                "object": "block",
+                "type": "heading_2",
+                "heading_2": {
+                    "rich_text": [{"type": "text", "text": {"content": "💡 풀이"}}]
+                }
+            },
+            {
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {"rich_text": []}
+            },
+            {"object": "block", "type": "divider", "divider": {}},
+            {
+                "object": "block",
+                "type": "heading_2",
+                "heading_2": {
+                    "rich_text": [{"type": "text", "text": {"content": "✅ 결과"}}]
+                }
+            },
+            {
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {"rich_text": []}
+            }
+        ]
     }
 
     res = requests.post(
@@ -81,7 +120,6 @@ def add_problem(token, db_id, problem):
         print(f"  ✅ {problem['name']} ({problem['slug']}) → Notion 추가 완료")
     else:
         print(f"  ❌ 추가 실패: {res.json()}")
-
 
 def sync(token, db_id, solved_list):
     print("\n📋 Notion DB 기존 데이터 조회 중...")
